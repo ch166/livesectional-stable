@@ -1,0 +1,498 @@
+altim_in_hg
+change_indicator
+fcst_time_from
+fcst_time_to
+icing_condition /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="14000" icing_max_alt_ft_agl="18000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="6000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="3000" icing_max_alt_ft_agl="6000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="4000" icing_max_alt_ft_agl="13000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="5000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="5000" icing_max_alt_ft_agl="7000" /
+icing_condition icing_intensity="1" icing_min_alt_ft_agl="9000" icing_max_alt_ft_agl="14000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="10000" icing_max_alt_ft_agl="13000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1000" icing_max_alt_ft_agl="9000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1200" icing_max_alt_ft_agl="10200" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1200" icing_max_alt_ft_agl="4200" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1200" icing_max_alt_ft_agl="8200" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1500" icing_max_alt_ft_agl="10500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1500" icing_max_alt_ft_agl="3500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="1800" icing_max_alt_ft_agl="3800" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="6000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2500" icing_max_alt_ft_agl="11500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2500" icing_max_alt_ft_agl="5500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2500" icing_max_alt_ft_agl="6500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2500" icing_max_alt_ft_agl="7500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2500" icing_max_alt_ft_agl="9500" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="2800" icing_max_alt_ft_agl="9800" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="3000" icing_max_alt_ft_agl="12000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="3000" icing_max_alt_ft_agl="6000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="4000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="4000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="4000" icing_max_alt_ft_agl="12000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="5000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="5000" icing_max_alt_ft_agl="7000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="6000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="700" icing_max_alt_ft_agl="9700" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="8000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="8000" icing_max_alt_ft_agl="17000" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="800" icing_max_alt_ft_agl="2800" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="800" icing_max_alt_ft_agl="9800" /
+icing_condition icing_intensity="2" icing_min_alt_ft_agl="9000" icing_max_alt_ft_agl="18000" /
+icing_condition icing_intensity="3" icing_min_alt_ft_agl="1000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="3" icing_min_alt_ft_agl="3000" icing_max_alt_ft_agl="12000" /
+icing_condition icing_intensity="4" icing_min_alt_ft_agl="13000" icing_max_alt_ft_agl="18000" /
+icing_condition icing_intensity="4" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="10000" icing_max_alt_ft_agl="19000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="1000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="11000" icing_max_alt_ft_agl="20000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="10000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="11000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="2000" icing_max_alt_ft_agl="5000" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="600" icing_max_alt_ft_agl="2600" /
+icing_condition icing_intensity="5" icing_min_alt_ft_agl="800" icing_max_alt_ft_agl="9800" /
+icing_condition icing_intensity="6" icing_max_alt_ft_agl="1000" /
+not_decoded
+probability
+sky_condition sky_cover="BKN" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="100" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="10000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="10000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1000" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1100" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="11000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1200" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="12000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1200" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1200" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1300" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="13000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1300" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1300" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1400" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="14000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1400" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1400" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="15000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1500" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1600" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="16000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1600" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1600" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1700" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1800" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="18000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1800" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1900" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="1900" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="200" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="20000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2000" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2100" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="21000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2200" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="22000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2200" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2300" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2400" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="24000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="25000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2500" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2500" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2600" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2700" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="27000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2800" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="2900" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="300" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="30000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3000" cloud_type="TCU" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3200" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3300" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3400" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3500" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3700" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="3800" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="400" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="4000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="4000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="4200" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="4500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="4600" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="5000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="5000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="500" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="5500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="600" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="6000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="6000" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="6500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="6600" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="700" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="7000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="700" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="7500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="800" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="8000" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="800" cloud_type="CB" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="8500" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="900" /
+sky_condition sky_cover="BKN" cloud_base_ft_agl="9000" /
+sky_condition sky_cover="FEW" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="100" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="10000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1100" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="11000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1200" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="12000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1200" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1300" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1300" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1400" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="14000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1400" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="15000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1500" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1600" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="16000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1600" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1600" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1700" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1700" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1800" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="18000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1800" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1800" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1900" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="1900" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="200" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="20000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2000" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2100" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="21000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2200" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="22000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2200" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2300" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="23000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2300" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2300" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2400" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="24000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2400" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="25000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2500" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2500" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2600" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2600" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2600" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2700" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2700" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2800" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="28000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2800" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="2900" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="300" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="30000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3000" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3200" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3300" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3300" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3400" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3400" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3500" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3500" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3600" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3600" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="3700" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="400" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4000" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4500" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4500" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="4600" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="5000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="5000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="5000" cloud_type="TCU" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="5500" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="600" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="6000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="6000" cloud_type="CB" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="700" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="7000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="800" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="8000" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="900" /
+sky_condition sky_cover="FEW" cloud_base_ft_agl="9000" /
+sky_condition sky_cover="NSC" /
+sky_condition sky_cover="OVC" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="100" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="10000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1000" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="100" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1100" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="11000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1100" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1200" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="12000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1300" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1300" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1400" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="14000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="15000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1500" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1600" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="16000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1700" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1800" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="18000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="1900" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="19000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="200" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="20000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2000" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2100" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2200" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2300" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="23000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2400" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2400" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="25000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2500" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2600" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2700" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2800" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="2900" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="300" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3000" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3300" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3500" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="3900" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="400" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="4000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="4000" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="400" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="4500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="5000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="5000" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="500" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="5500" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="600" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="6000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="600" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="700" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="7000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="700" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="800" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="8000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="800" cloud_type="CB" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="900" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="9000" /
+sky_condition sky_cover="OVC" cloud_base_ft_agl="900" cloud_type="CB" /
+sky_condition sky_cover="OVX" /
+sky_condition sky_cover="SCT" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="100" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="10000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1000" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1100" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="11000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1200" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="12000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1200" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1200" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1300" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="13000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1300" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1400" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="14000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="15000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1500" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1500" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1600" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="16000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1600" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1600" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1700" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="17000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1700" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1700" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1800" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="18000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1800" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="1900" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="200" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="20000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2000" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2100" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="21000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2200" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="22000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2200" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2300" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="23000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2300" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2400" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="24000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2400" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="25000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2500" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2500" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2600" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2700" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2800" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="2800" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="300" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="30000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3000" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3300" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3300" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3500" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3600" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="3700" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="400" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4000" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4200" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4300" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4500" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4600" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="4800" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="5000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="5000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="5000" cloud_type="TCU" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="5500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="600" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="6000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="6000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="600" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="6500" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="700" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="7000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="800" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="8000" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="8000" cloud_type="CB" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="900" /
+sky_condition sky_cover="SCT" cloud_base_ft_agl="9000" /
+sky_condition sky_cover="SKC" /
+time_becoming
+turbulence_condition /
+turbulence_condition turbulence_intensity="1" turbulence_max_alt_ft_agl="2000" /
+turbulence_condition turbulence_intensity="1" turbulence_max_alt_ft_agl="3000" /
+turbulence_condition turbulence_intensity="1" turbulence_max_alt_ft_agl="4000" /
+turbulence_condition turbulence_intensity="1" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="4000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="6000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="200" turbulence_max_alt_ft_agl="3200" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="10000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="300" turbulence_max_alt_ft_agl="3300" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="400" turbulence_max_alt_ft_agl="3400" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="5000" turbulence_max_alt_ft_agl="14000" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="1500" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="2500" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="3500" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="700" turbulence_max_alt_ft_agl="3700" /
+turbulence_condition turbulence_intensity="1" turbulence_min_alt_ft_agl="9000" turbulence_max_alt_ft_agl="18000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="1000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="2000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="3000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="6000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="7000" /
+turbulence_condition turbulence_intensity="2" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="3000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="18000" turbulence_max_alt_ft_agl="27000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="11000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="27000" turbulence_max_alt_ft_agl="36000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="7000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="300" turbulence_max_alt_ft_agl="3300" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="4000" turbulence_max_alt_ft_agl="8000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="5000" turbulence_max_alt_ft_agl="12000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="5000" turbulence_max_alt_ft_agl="14000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="6500" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="6000" turbulence_max_alt_ft_agl="12000" /
+turbulence_condition turbulence_intensity="2" turbulence_min_alt_ft_agl="9000" turbulence_max_alt_ft_agl="12000" /
+turbulence_condition turbulence_intensity="3" turbulence_max_alt_ft_agl="1000" /
+turbulence_condition turbulence_intensity="3" turbulence_max_alt_ft_agl="2000" /
+turbulence_condition turbulence_intensity="3" turbulence_max_alt_ft_agl="3000" /
+turbulence_condition turbulence_intensity="3" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="6000" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="7000" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="12000" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="4500" /
+turbulence_condition turbulence_intensity="3" turbulence_min_alt_ft_agl="500" turbulence_max_alt_ft_agl="6500" /
+turbulence_condition turbulence_intensity="4" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="10000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="11000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="6000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="10000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="4" turbulence_min_alt_ft_agl="9000" turbulence_max_alt_ft_agl="14000" /
+turbulence_condition turbulence_intensity="5" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="10000" /
+turbulence_condition turbulence_intensity="5" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="5000" /
+turbulence_condition turbulence_intensity="5" turbulence_min_alt_ft_agl="2000" turbulence_max_alt_ft_agl="7000" /
+turbulence_condition turbulence_intensity="6" turbulence_max_alt_ft_agl="7000" /
+turbulence_condition turbulence_intensity="6" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="6" turbulence_min_alt_ft_agl="3000" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="6" turbulence_min_alt_ft_agl="4000" turbulence_max_alt_ft_agl="13000" /
+turbulence_condition turbulence_intensity="6" turbulence_min_alt_ft_agl="9000" turbulence_max_alt_ft_agl="18000" /
+turbulence_condition turbulence_intensity="7" turbulence_max_alt_ft_agl="9000" /
+turbulence_condition turbulence_intensity="7" turbulence_min_alt_ft_agl="1000" turbulence_max_alt_ft_agl="10000" /
+vert_vis_ft
+visibility_statute_mi
+wind_dir_degrees
+wind_gust_kt
+wind_shear_dir_degrees
+wind_shear_hgt_ft_agl
+wind_shear_speed_kt
+wind_speed_kt
+wx_string
