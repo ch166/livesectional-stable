@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- #
-""" Flask Module for WEB Interface. """
+"""Flask Module for WEB Interface."""
 
 import os
 
@@ -40,6 +40,7 @@ from pyqrcode import QRCode
 import utils
 
 # import conf
+from update_leds import LedMode
 import debugging
 
 # import sysinfo
@@ -48,7 +49,20 @@ import debugging
 class WebViews:
     """Class to contain all the Flask WEB functionality."""
 
-    def __init__(self, config, sysdata, airport_database, appinfo, LEDmgmt):
+    max_lat = 0
+    min_lat = 0
+    max_lon = 0
+    min_lon = 0
+
+    airports = []  # type: list[object]
+    update_vers = None
+    machines = []  # type: list[str]
+    update_available = None
+    ap_info = None
+    settings = None
+    led_map_dict = {}  # type: dict
+
+    def __init__(self, config, sysdata, airport_database, appinfo, led_mgmt):
         self.conf = config
         self._sysdata = sysdata
         self._airport_database = airport_database
@@ -60,7 +74,7 @@ class WebViews:
 
         self.app.secret_key = secrets.token_hex(16)
         self.app.add_url_rule("/", view_func=self.index, methods=["GET"])
-        self.app.add_url_rule("/sysinfo", view_func=self.yindex, methods=["GET"])
+        self.app.add_url_rule("/sysinfo", view_func=self.systeminfo, methods=["GET"])
         self.app.add_url_rule("/qrcode", view_func=self.qrcode, methods=["GET"])
         self.app.add_url_rule(
             "/metar/<airport>", view_func=self.getmetar, methods=["GET"]
@@ -68,6 +82,9 @@ class WebViews:
         self.app.add_url_rule("/taf/<airport>", view_func=self.gettaf, methods=["GET"])
         self.app.add_url_rule("/wx/<airport>", view_func=self.getwx, methods=["GET"])
         self.app.add_url_rule("/tzset", view_func=self.tzset, methods=["GET", "POST"])
+        self.app.add_url_rule(
+            "/ledmodeset", view_func=self.ledmodeset, methods=["GET", "POST"]
+        )
         self.app.add_url_rule(
             "/led_map", view_func=self.led_map, methods=["GET", "POST"]
         )
@@ -110,24 +127,16 @@ class WebViews:
         self.app.add_url_rule(
             "/system_reboot", view_func=self.system_reboot, methods=["GET", "POST"]
         )
+        self.app.add_url_rule(
+            "/mapturnon", view_func=self.handle_mapturnon, methods=["GET", "POST"]
+        )
+        self.app.add_url_rule(
+            "/mapturnoff", view_func=self.handle_mapturnoff, methods=["GET", "POST"]
+        )
 
-        self.max_lat = 0
-        self.min_lat = 0
-        self.max_lon = 0
-        self.min_lon = 0
+        self._led_strip = led_mgmt
 
-        self._led_strip = LEDmgmt
-
-        # Replace These with real data
-        self.airports = []
-        self.update_vers = None
-        self.machines = []
         self.num = self.conf.get_int("default", "led_count")
-        self.update_available = None
-        self.ap_info = None
-        self.settings = None
-
-        self.led_map_dict = {}
 
     def run(self):
         """Run Flask Application.
@@ -138,6 +147,8 @@ class WebViews:
 
     def standardtemplate_data(self):
         """Generate a standardized template_data."""
+        # For performance reasons we should do the minimum of data generation now
+        # This gets executed for every page load
         airport_dict_data = {}
         for (
             airport_icao,
@@ -154,6 +165,8 @@ class WebViews:
             airport_record["hmindex"] = airport_object.heatmap_index()
             airport_dict_data[airport_icao] = airport_record
 
+        current_ledmode = self._led_strip.ledmode()
+
         template_data = {
             "title": "NOT SET - " + self._appinfo.current_version(),
             "airports": airport_dict_data,
@@ -166,6 +179,7 @@ class WebViews:
                 self._airport_database.get_metar_update_time()
             ),
             "current_timezone": self.conf.get_string("default", "timezone"),
+            "current_ledmode": current_ledmode,
             "num": self.num,
             "version": self._appinfo.current_version(),
             "update_available": self.update_available,
@@ -175,8 +189,9 @@ class WebViews:
         }
         return template_data
 
-    def yindex(self):
+    def systeminfo(self):
         """Flask Route: /sysinfo - Display System Info."""
+        self._sysdata.refresh()
         template_data = self.standardtemplate_data()
         template_data["title"] = "SysInfo"
 
@@ -205,6 +220,41 @@ class WebViews:
 
         debugging.info("Opening Time Zone Set page")
         return render_template("tzset.html", **template_data)
+
+    def ledmodeset(self):
+        """Flask Route: /ledmodeset - Set LED Display Mode."""
+        if request.method == "POST":
+            newledmode = request.form["newledmode"]
+            newledmode_upper = newledmode.upper()
+            if newledmode_upper == "METAR":
+                self._led_strip.set_ledmode(LedMode.METAR)
+            if newledmode_upper == "OFF":
+                self._led_strip.set_ledmode(LedMode.OFF)
+            if newledmode_upper == "TEST":
+                self._led_strip.set_ledmode(LedMode.TEST)
+            if newledmode_upper == "RABBIT":
+                self._led_strip.set_ledmode(LedMode.RABBIT)
+            if newledmode_upper == "METAR":
+                self._led_strip.set_ledmode(LedMode.METAR)
+            if newledmode_upper == "SHUFFLE":
+                self._led_strip.set_ledmode(LedMode.SHUFFLE)
+            if newledmode_upper == "RAINBOW":
+                self._led_strip.set_ledmode(LedMode.RAINBOW)
+
+            flash(f"LED Mode set to {newledmode}")
+            debugging.info(f"LEDMode set to {newledmode}")
+            return redirect("ledmodeset")
+
+        ledmodelist = ["METAR", "Off", "Test", "Rabbit", "Shuffle", "Rainbow"]
+        current_ledmode = self._led_strip.ledmode()
+
+        template_data = self.standardtemplate_data()
+        template_data["title"] = "LEDModeSet"
+        template_data["ledoptionlist"] = ledmodelist
+        template_data["current_ledmode"] = current_ledmode
+
+        debugging.info("Opening LEDode Set page")
+        return render_template("ledmode.html", **template_data)
 
     # FIXME: Integrate into Class
     # @app.route('/touchscr', methods=["GET", "POST"])
@@ -309,7 +359,6 @@ class WebViews:
             self.min_lon = min(lon_list)
         else:
             self.max_lat = 0
-        return
 
     # Route to display map's airports on a digital map.
     # @app.route('/led_map', methods=["GET", "POST"])
@@ -333,6 +382,7 @@ class WebViews:
             control_scale=True,
             zoom_control=True,
             tiles="OpenStreetMap",
+            attr="OpenStreetMap",
         )
         # Place map within bounds of screen
         folium_map.fit_bounds(
@@ -411,12 +461,16 @@ class WebViews:
 
         # FIXME: Move URL to configuration
         folium.TileLayer(
-            "http://wms.chartbundle.com/tms/1.0.0/sec/{z}/{x}/{y}.png?origin=nw",
+            "https://wms.chartbundle.com/tms/1.0.0/sec/{z}/{x}/{y}.png?origin=nw",
             attr="chartbundle.com",
             name="ChartBundle Sectional",
         ).add_to(folium_map)
-        folium.TileLayer("Stamen Terrain", name="Stamen Terrain").add_to(folium_map)
-        folium.TileLayer("CartoDB positron", name="CartoDB Positron").add_to(folium_map)
+        folium.TileLayer(
+            "Stamen Terrain", name="Stamen Terrain", attr="stamen.com"
+        ).add_to(folium_map)
+        folium.TileLayer(
+            "CartoDB positron", name="CartoDB Positron", attr="carto.com"
+        ).add_to(folium_map)
 
         folium.LayerControl().add_to(folium_map)
 
@@ -457,6 +511,7 @@ class WebViews:
             control_scale=True,
             zoom_control=True,
             tiles="OpenStreetMap",
+            attr="OpenStreetMap",
         )
 
         # Place map within bounds of screen
@@ -560,8 +615,12 @@ class WebViews:
             attr="chartbundle.com",
             name="ChartBundle Sectional",
         ).add_to(folium_map)
-        folium.TileLayer("Stamen Terrain", name="Stamen Terrain").add_to(folium_map)
-        folium.TileLayer("CartoDB positron", name="CartoDB Positron").add_to(folium_map)
+        folium.TileLayer(
+            "Stamen Terrain", name="Stamen Terrain", attr="stamen.com"
+        ).add_to(folium_map)
+        folium.TileLayer(
+            "CartoDB positron", name="CartoDB Positron", attr="charto.com"
+        ).add_to(folium_map)
 
         folium.LayerControl().add_to(folium_map)
 
@@ -616,11 +675,17 @@ class WebViews:
                     outfile.write(f"{icao}: {airport_id} :\n")
                     counter = counter + 1
                 outfile.write(f"stats: {counter}\n")
-        wx_data = {"airport": "Not Set", "metar": "", "flightcategory": "UNKN"}
+            wx_data = {
+                "airport": "Debugging Request",
+                "metar": "",
+                "flightcategory": "DB DUMPED",
+            }
+            return json.dumps(wx_data)
+        wx_data = {"airport": "Default Value", "metar": "", "flightcategory": "UNKN"}
         try:
             airport_entry = self._airport_database.get_airportxml(airport)
-            # debugging.info(airport_entry)
-            wx_data["airport"] = airport_entry["station_id"]
+            debugging.info(airport_entry)
+            wx_data["airport"] = airport_entry["stationId"]
             wx_data["metar"] = airport_entry["raw_text"]
             wx_data["flightcategory"] = airport_entry["flight_category"]
             wx_data["latitude"] = airport_entry["latitude"]
@@ -820,44 +885,43 @@ class WebViews:
         debugging.info("Controlling LED's on/off")
 
         if request.method == "POST":
-
             if "buton" in request.form:
                 num = int(request.form["lednum"])
                 debugging.info("LED " + str(num) + " On")
-                self._led_strip.setLedColor(num, Color(155, 155, 155))
+                self._led_strip.set_led_color(num, Color(155, 155, 155))
                 self._led_strip.show()
                 flash("LED " + str(num) + " On")
 
             elif "butoff" in request.form:
                 num = int(request.form["lednum"])
                 debugging.info("LED " + str(num) + " Off")
-                self._led_strip.setLedColor(num, Color(0, 0, 0))
+                self._led_strip.set_led_color(num, Color(0, 0, 0))
                 self._led_strip.show()
                 flash("LED " + str(num) + " Off")
 
             elif "butup" in request.form:
                 debugging.info("LED UP")
                 num = int(request.form["lednum"])
-                self._led_strip.setLedColor(num, Color(0, 0, 0))
+                self._led_strip.set_led_color(num, Color(0, 0, 0))
                 num = num + 1
 
                 # FIXME: self.airports retired
                 if num > len(self.airports):
                     num = len(self.airports)
 
-                self._led_strip.setLedColor(num, Color(155, 155, 155))
+                self._led_strip.set_led_color(num, Color(155, 155, 155))
                 self._led_strip.show()
                 flash("LED " + str(num) + " should be On")
 
             elif "butdown" in request.form:
                 debugging.info("LED DOWN")
                 num = int(request.form["lednum"])
-                self._led_strip.setLedColor(num, Color(0, 0, 0))
+                self._led_strip.set_led_color(num, Color(0, 0, 0))
 
                 num = num - 1
                 num = max(num, 0)
 
-                self._led_strip.setLedColor(num, Color(155, 155, 155))
+                self._led_strip.set_led_color(num, Color(155, 155, 155))
                 self._led_strip.show()
                 flash("LED " + str(num) + " should be On")
 
@@ -867,7 +931,7 @@ class WebViews:
 
                 # FIXME: self.airports retired
                 for num in range(len(self.airports)):
-                    self._led_strip.setLedColor(num, Color(155, 155, 155))
+                    self._led_strip.set_led_color(num, Color(155, 155, 155))
                 self._led_strip.show()
                 flash("All LEDs should be On")
                 num = 0
@@ -878,7 +942,7 @@ class WebViews:
 
                 # FIXME: self.airports retired
                 for num in range(len(self.airports)):
-                    self._led_strip.setLedColor(num, Color(0, 0, 0))
+                    self._led_strip.set_led_color(num, Color(0, 0, 0))
                 self._led_strip.show()
                 flash("All LEDs should be Off")
                 num = 0
@@ -1189,26 +1253,25 @@ class WebViews:
         return redirect("/")
         # temp[3] holds name of page that called this route.
 
-    # FIXME: Integrate into Class
     # Route to turn off the map and displays
-    # @app.route("/shutdown1", methods=["GET", "POST"])
-    def shutdown1(self):
-        """Flask Route: /shutdown1 - Trigger process shutdown"""
+    # @app.route("/mapturnoff", methods=["GET", "POST"])
+    def handle_mapturnoff(self):
+        """Flask Route: /mapturnoff - Trigger process shutdown"""
         url = request.referrer
-        ipadd = self._sysdata.local_ip()
-        if url is None:
-            url = "http://" + ipadd + ":5000/"
-            # Use index if called from URL and not page.
+        debugging.info(f"Shutoff Map from {url}")
+        self._led_strip.set_ledmode(LedMode.OFF)
+        flash("Map Turned Off")
+        return redirect("/")
+        # temp[3] holds name of page that called this route.
 
-        # temp = url.split("/")
-        debugging.info("Shutoff Map from " + url)
-        # FIXME:
-        # os.system("ps -ef | grep '/NeoSectional/metar-display-v4.py' | awk '{print $2}' | xargs sudo kill")
-        # os.system("ps -ef | grep '/NeoSectional/metar-v4.py' | awk '{print $2}' | xargs sudo kill")
-        # os.system("ps -ef | grep '/NeoSectional/check-display.py' | awk '{print $2}' | xargs sudo kill")
-        # os.system('sudo python3 /NeoSectional/shutoff.py &')
-        flash("Map Turned Off ")
-        time.sleep(1)
+    # Route to turn off the map and displays
+    # @app.route("/mapturnoff", methods=["GET", "POST"])
+    def handle_mapturnon(self):
+        """Flask Route: /mapturnon - Trigger process shutdown"""
+        url = request.referrer
+        debugging.info(f"Turn Map ON from {url}")
+        self._led_strip.set_ledmode(LedMode.METAR)
+        flash("Map Turned On")
         return redirect("/")
         # temp[3] holds name of page that called this route.
 

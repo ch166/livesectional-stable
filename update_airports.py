@@ -33,20 +33,12 @@ Created on Sat Jun 15 08:01:44 2019.
 # import os
 import time
 from datetime import datetime
-import pytz
-
-
-# from datetime import datetime
-# from datetime import timedelta
-# from distutils import util
-# from enum import Enum
-# from urllib.request import urlopen
-# import urllib.error
-# import socket
 import shutil
 
 import csv
 import json
+
+import pytz
 
 # Moving to use requests instead of urllib
 import requests
@@ -71,8 +63,7 @@ class AirportDB:
     def __init__(self, conf):
         """Create a database of Airports to be tracked."""
 
-        # TODO:
-        # A lot of the class local variables are extras,
+        # TODO: A lot of the class local variables are extras,
         # left over from the restructuring of the code.
         # for example: Some are just copies of config file data, and it
         # should be remove them as class-local variables and access the
@@ -109,8 +100,6 @@ class AirportDB:
         debugging.debug("AirportDB : init")
 
         self.load_airport_db()
-        # self.update_airport_metar_xml()
-        # self.save_airport_db()
         debugging.info("AirportDB : init complete")
 
     def get_airport(self, airport_icao):
@@ -165,13 +154,13 @@ class AirportDB:
         airportdb_list = []
         for airport_db_id, airportdb_row in self.airport_master_dict.items():
             airport_save_record = {}
-            aprt = airportdb_row["airport"]
-            airport_save_record["active"] = str(aprt.active())
-            airport_save_record["heatmap"] = aprt.heatmap_index()
-            airport_save_record["icao"] = aprt.icaocode()
-            airport_save_record["led"] = str(aprt.get_led_index())
+            arpt = airportdb_row["airport"]
+            airport_save_record["active"] = str(arpt.active())
+            airport_save_record["heatmap"] = arpt.heatmap_index()
+            airport_save_record["icao"] = arpt.icaocode()
+            airport_save_record["led"] = str(arpt.get_led_index())
             airport_save_record["purpose"] = airportdb_row["purpose"]
-            airport_save_record["wxsrc"] = aprt.wxsrc()
+            airport_save_record["wxsrc"] = arpt.wxsrc()
             airportdb_list.append(airport_save_record)
 
         return airportdb_list
@@ -230,7 +219,7 @@ class AirportDB:
                 self.airport_led_dict[airport_db_id] = airportdb_row
             if airport_purpose in ("web", "all"):
                 self.airport_web_dict[airport_db_id] = airportdb_row
-        return
+        return True
 
     def load_airport_db(self):
         """Load Airport Data file."""
@@ -248,12 +237,10 @@ class AirportDB:
         # On initial boot ; the saved data set could be empty
         # - This will need to create all the objects
         # On update ; some records will already exist, but may have updates
-
         airport_dict_new = self.airport_dict_from_json(new_airport_json_dict)
         # Update the master dictionary ; overwrite existing keys with new keys
         self.airport_master_dict.update(airport_dict_new)
         self.airport_dicts_update()
-
         debugging.debug("Airport Load and Merge complete")
 
     def save_airport_db(self):
@@ -291,6 +278,8 @@ class AirportDB:
         display_counter = 0
 
         for metar_data in root.iter("METAR"):
+            if metar_data is None:
+                return False
             station_id = metar_data.find("station_id").text
             station_id = station_id.lower()
 
@@ -305,7 +294,7 @@ class AirportDB:
             # print(":" + station_id + ": ", end='')
             # FIXME: Move most of this code into an Airport Class function, where it belongs
             metar_dict[station_id] = {}
-            metar_dict[station_id]["station_id"] = station_id
+            metar_dict[station_id]["stationId"] = station_id
             next_object = metar_data.find("raw_text")
             if next_object is not None:
                 metar_dict[station_id]["raw_text"] = next_object.text
@@ -318,12 +307,38 @@ class AirportDB:
                 metar_dict[station_id]["observation_time"] = "Missing"
             next_object = metar_data.find("wind_dir_degrees")
             if next_object is not None:
-                metar_dict[station_id]["wind_dir_degrees"] = int(next_object.text)
+                try:
+                    next_val = int(next_object.text)
+                except (TypeError, ValueError):
+                    next_val_int = False
+                else:
+                    next_val_int = True
+                if next_val_int:
+                    metar_dict[station_id]["wind_dir_degrees"] = int(next_object.text)
+                else:
+                    # FIXME: Hack to handle complex wind definitions (eg: VRB)
+                    debugging.info(
+                        f"GRR: wind_dir_degrees parse mismatch - setting to zero; actual:{next_object.text}:"
+                    )
+                    metar_dict[station_id]["wind_dir_degrees"] = 0
             else:
                 metar_dict[station_id]["wind_dir_degrees"] = 0
             next_object = metar_data.find("wind_speed_kt")
             if next_object is not None:
-                metar_dict[station_id]["wind_speed_kt"] = int(next_object.text)
+                try:
+                    next_val = int(next_object.text)
+                except (TypeError, ValueError):
+                    next_val_int = False
+                else:
+                    next_val_int = True
+                if next_val_int:
+                    metar_dict[station_id]["wind_speed_kt"] = int(next_object.text)
+                else:
+                    # FIXME: Hack to handle complex wind definitions (eg: VRB)
+                    debugging.info(
+                        f"GRR: wind_speed_kt parse mismatch - setting to zero; actual:{next_object.text}:"
+                    )
+                    metar_dict[station_id]["wind_speed_kt"] = 0
             else:
                 metar_dict[station_id]["wind_speed_kt"] = 0
             next_object = metar_data.find("metar_type")
@@ -333,7 +348,20 @@ class AirportDB:
                 metar_dict[station_id]["metar_type"] = "Missing"
             next_object = metar_data.find("wind_gust_kt")
             if next_object is not None:
-                metar_dict[station_id]["wind_gust_kt"] = int(next_object.text)
+                try:
+                    next_val = int(next_object.text)
+                except (TypeError, ValueError):
+                    next_val_int = False
+                else:
+                    next_val_int = True
+                if next_val_int:
+                    metar_dict[station_id]["wind_gust_kt"] = int(next_object.text)
+                else:
+                    # FIXME: Hack to handle complex wind definitions (eg: VRB)
+                    debugging.info(
+                        f"GRR: wind_gust_kt parse mismatch - setting to zero; actual:{next_object.text}:"
+                    )
+                    metar_dict[station_id]["wind_gust_kt"] = 0
             else:
                 metar_dict[station_id]["wind_gust_kt"] = 0
             next_object = metar_data.find("sky_condition")
@@ -367,8 +395,7 @@ class AirportDB:
             else:
                 metar_dict[station_id]["longitude"] = "Missing"
         self.metar_xml_dict = metar_dict
-        UTC = pytz.utc
-        self.metar_update_time = datetime.now(UTC)
+        self.metar_update_time = datetime.now(pytz.utc)
         debugging.debug("Updating Airport METAR from XML")
         return True
 
@@ -402,17 +429,19 @@ class AirportDB:
             return False
 
         for taf in root.iter("TAF"):
+            if taf is None:
+                return False
             taf_data = {}
-            stationId = taf.find("station_id").text
-            stationId = stationId.lower()
+            station_id = taf.find("station_id").text
+            station_id = station_id.lower()
             issue_time = taf.find("issue_time").text
             raw_taf = taf.find("raw_text").text
 
-            taf_data["stationId"] = stationId
+            taf_data["stationId"] = station_id
             taf_data["issue_time"] = issue_time
             taf_data["raw_text"] = raw_taf
 
-            debugging.debug(f"TAF: {stationId} - {issue_time}")
+            debugging.debug(f"TAF: {station_id} - {issue_time}")
             fcast_index = 0
             taf_forecast = []
 
@@ -489,7 +518,23 @@ class AirportDB:
                             visibility_statute_mi = forecast.find(
                                 "visibility_statute_mi"
                             ).text  # get visibility number
-                            visibility_statute_mi = float(visibility_statute_mi)
+                            try:
+                                next_val = float(visibility_statute_mi)
+                            except (TypeError, ValueError):
+                                next_val_float = False
+                            else:
+                                next_val_float = True
+                            if next_val_float:
+                                visibility_statute_mi = float(visibility_statute_mi)
+                            else:
+                                # FIXME: Hack for METAR parsing of complex valus
+                                if visibility_statute_mi == "6+":
+                                    visibility_statute_mi = 6
+                                else:
+                                    debugging.info(
+                                        f"GRR: visibility_statute_ml parse mismatch - setting to ten (10) actual:{visibility_statute_mi}"
+                                    )
+                                    visibility_statute_mi = 10
                             debugging.debug(visibility_statute_mi)
 
                             if visibility_statute_mi < 1.0:
@@ -503,7 +548,7 @@ class AirportDB:
                             ):
                                 flightcategory = "MVFR"
 
-                    debugging.debug("Airport - " + stationId)
+                    debugging.debug("Airport - " + station_id)
                     debugging.debug("Flight Category - " + flightcategory)
                     if "wind_speed_kt" in fcast:
                         debugging.debug("Wind Speed - " + fcast["wind_speed_kt"])
@@ -525,13 +570,12 @@ class AirportDB:
                 fcast_index = fcast_index + 1
 
             taf_data["forecast"] = taf_forecast
-            taf_dict[stationId] = taf_data
+            taf_dict[station_id] = taf_data
 
-            debugging.debug(f"TAF: {stationId} - {issue_time} - {fcast_index - 1}")
+            debugging.debug(f"TAF: {station_id} - {issue_time} - {fcast_index - 1}")
 
         self.taf_xml_dict = taf_dict
-        UTC = pytz.utc
-        self.taf_update_time = datetime.now(UTC)
+        self.taf_update_time = datetime.now(pytz.utc)
         debugging.debug("Updating Airport TAF from XML")
         return True
 
@@ -549,14 +593,26 @@ class AirportDB:
 
     def import_runways(self):
         """Load CSV Runways file."""
-        runways_file = self.conf.get_string("filenames", "runways_file")
+        runways_master_data = self.conf.get_string("filenames", "runways_master_data")
         runway_data = None
         index_counter = 0
-        with open(runways_file, "r") as rway_file:
+        with open(runways_master_data, "r") as rway_file:
             runway_data = list(csv.DictReader(rway_file))
             index_counter += 1
         debugging.debug(f"CSV Load found {index_counter} rows")
         self.runway_data = runway_data
+        return True
+
+    def import_airports(self):
+        """Load CSV Airports file."""
+        airports_master_data = self.conf.get_string("filenames", "airports_master_data")
+        airport_data = None
+        index_counter = 0
+        with open(airports_master_data, "r") as aprt_file:
+            airport_data = list(csv.DictReader(aprt_file))
+            index_counter += 1
+        debugging.debug(f"CSV Load found {index_counter} rows")
+        self.airport_data = airport_data
         return True
 
     def update_airport_runways(self):
@@ -596,7 +652,9 @@ class AirportDB:
         metar_xml_url = conf.get_string("urls", "metar_xml_gz")
         metar_file = conf.get_string("filenames", "metar_xml_data")
         runways_csv_url = conf.get_string("urls", "runways_csv_url")
-        runways_file = conf.get_string("filenames", "runways_file")
+        airports_csv_url = conf.get_string("urls", "airports_csv_url")
+        runways_master_data = conf.get_string("filenames", "runways_master_data")
+        airports_master_data = conf.get_string("filenames", "airports_master_data")
         tafs_xml_url = conf.get_string("urls", "tafs_xml_gz")
         tafs_file = conf.get_string("filenames", "tafs_xml_data")
         mos00_xml_url = conf.get_string("urls", "mos00_data_gz")
@@ -607,8 +665,6 @@ class AirportDB:
         mos12_file = conf.get_string("filenames", "mos12_xml_data")
         mos18_xml_url = conf.get_string("urls", "mos18_data_gz")
         mos18_file = conf.get_string("filenames", "mos18_xml_data")
-
-        https_session = requests.Session()
 
         # FIXME: This pre-seeds the data sets with whatever data is on disk.
         # This is great for a quick restart ; but bad for a reload after a period of time offline.
@@ -623,6 +679,7 @@ class AirportDB:
         etag_mos12 = None
         etag_mos18 = None
         etag_runways = None
+        etag_airports = None
 
         while True:
             debugging.debug(
@@ -630,6 +687,8 @@ class AirportDB:
                 + str(aviation_weather_adds_timer)
                 + "m)"
             )
+
+            https_session = requests.Session()
 
             ret, etag_metar = utils.download_newer_file(
                 https_session,
@@ -644,7 +703,7 @@ class AirportDB:
             elif ret is False:
                 debugging.debug("Server side METAR older")
 
-            ret, tafs_etag = utils.download_newer_file(
+            ret, etag_tafs = utils.download_newer_file(
                 https_session, tafs_xml_url, tafs_file, decompress=True, etag=etag_tafs
             )
             if ret is True:
@@ -678,7 +737,7 @@ class AirportDB:
                 debugging.debug("Server side MOS12 older")
 
             ret, etag_runways = utils.download_newer_file(
-                https_session, runways_csv_url, runways_file, etag=etag_runways
+                https_session, runways_csv_url, runways_master_data, etag=etag_runways
             )
             if ret is True:
                 debugging.debug("Downloaded runways.csv")
@@ -686,6 +745,20 @@ class AirportDB:
                 self.update_airport_runways()
             elif ret is False:
                 debugging.debug("Server side runways.csv older")
+
+            ret, etag_airports = utils.download_newer_file(
+                https_session,
+                airports_csv_url,
+                airports_master_data,
+                etag=etag_airports,
+            )
+            if ret is True:
+                debugging.debug("Downloaded airports.csv")
+                self.import_airports()
+                # self.update_airport_lat_lon()
+                # Need to use the data in airports.csv to provide lat/lon data for any airports..
+            elif ret is False:
+                debugging.debug("Server side airports.csv older")
 
             ret, etag_mos18 = utils.download_newer_file(
                 https_session, mos18_xml_url, mos18_file, etag=etag_mos18
@@ -707,4 +780,7 @@ class AirportDB:
             kbfi_runway = self.airport_runway_data("kbfi")
             debugging.debug(f"Runway data - kbfi :{kbfi_runway}:")
             time.sleep(aviation_weather_adds_timer * 60)
+
+            # Clean UP HTTPS_Session
+            https_session.close()
         debugging.error("Hit the exit of the airport update loop")

@@ -151,8 +151,16 @@ def download_newer_file(session, url, filename, decompress=False, etag=None):
     # Do a HTTP GET to pull headers so we can check timestamps
     try:
         req = session.head(url, allow_redirects=True, timeout=5)
+    except ConnectionError as err:
+        debugging.debug(f"Connection Error :{url}:")
+        debugging.error(err)
+        return False, url_etag
+    except TimeoutError as err:
+        debugging.debug(f"Timeout Error :{url}:")
+        debugging.error(err)
+        return False, url_etag
     except Exception as err:
-        debugging.debug(f"Problem requesting {url}")
+        debugging.debug(f"Generic error checking HEAD :{url}:")
         debugging.error(err)
         return False, url_etag
 
@@ -189,13 +197,27 @@ def download_newer_file(session, url, filename, decompress=False, etag=None):
         try:
             # Download file to temporary object
             download_object = tempfile.NamedTemporaryFile(delete=False)
-            urllib.request.urlretrieve(url, download_object.name)
+            try:
+                urllib.request.urlretrieve(url, download_object.name)
+            except ConnectionError as err:
+                debugging.info(f"Connection error in download :{url}:")
+                debugging.error(err)
+                return False, url_etag
+            except TimeoutError as err:
+                debugging.info(f"Timeout Error :{url}:")
+                debugging.error(err)
+                return False, url_etag
+            except Exception as err:
+                debugging.info(f"Generic error in urlretrieve :{url}:")
+                debugging.error(err)
+                return False, url_etag
+
             if decompress:
                 uncompress_object = tempfile.NamedTemporaryFile(delete=False)
                 try:
                     decompress_file_gz(download_object.name, uncompress_object.name)
                 except Exception as err:
-                    debugging.error(f"File decompression failed for : {filename}")
+                    debugging.info(f"File decompression failed for : {filename}")
                     debugging.error(err)
                 os.remove(download_object.name)
                 download_object = uncompress_object
@@ -223,19 +245,20 @@ def decompress_file_gz(srcfile, dstfile):
         with gzip.open(srcfile, "rb") as f_in:
             with open(dstfile, "wb") as f_out:
                 shutil.copyfileobj(f_in, f_out)
-        return 0
+        return True
     except Exception as err:
         # Something went wrong
-        debugging.error("File gzip decompress error")
+        debugging.info(f"File gzip decompress error f:{srcfile}:")
         debugging.error(err)
-        return 1
+        return False
 
 
-def time_in_range(start, end, x_time):
+def time_in_range(start_time, end_time, check_time):
     """See if a time falls within range."""
-    if start <= end:
-        return start <= x_time <= end
-    return end <= x_time <= start
+    if start_time < end_time:
+        return check_time >= start_time and check_time <= end_time
+    else:  # overnight
+        return check_time >= start_time or check_time <= end_time
 
 
 # Compare current time plus offset to TAF's time period and return difference

@@ -76,7 +76,7 @@ class UpdateOLEDs:
     # Broad option 2 - Multiple OLED devices connected via an i2c multiplexer
     # for example: TCA9548A i2c Multiplexer
     # In this scenario - a call is made to the mux to enable a single i2c device
-    # before it is used ; and only one device is visible at a time.
+    # before it is used ; and only one device is visible on the i2c bus at a time.
     # Many OLED devices can be connected ; and they can all have the same device ID;
     # as they will only be used when they are selected by the mux ; and at the point
     # they are the only visible device with that id
@@ -100,7 +100,7 @@ class UpdateOLEDs:
     #   push changes
     #   release i2c lock
     #
-    # the time spend inside the critical lock portion should be minimized
+    # the time spent inside the critical lock portion should be minimized
     # This is to allow other threads to make requests to update data
 
     # Looking to track data about individual OLED screens ; to allow support for multiple options
@@ -150,7 +150,6 @@ class UpdateOLEDs:
     }
 
     def __init__(self, conf, airport_database, i2cbus):
-
         self.conf = conf
         self.airport_database = airport_database
         self.i2cbus = i2cbus
@@ -213,6 +212,33 @@ class UpdateOLEDs:
             draw.text((30, 40), txt, font=fnt, fill="white")
         self.i2cbus.bus_unlock()
 
+    def generate_image(self, oled_id, airport, rway_angle, winddir, windspeed):
+        """Create and save Web version of OLED display image"""
+
+        # Image Dimensions
+        width = 320
+        height = 200
+        image_filename = f"static/oled_{oled_id}_oled_display.png"
+
+        # Runway Dimensions
+        rway_width = 16
+        rway_x = 15  # 15 pixel border
+        rway_y = int(height / 2 - rway_width / 2)
+        airport_details = f"{airport} {winddir}@{windspeed}"
+        wind_poly = utils_gfx.create_wind_arrow(winddir, width, height)
+        runway_poly = utils_gfx.create_runway(
+            rway_x, rway_y, rway_width, rway_angle, width, height
+        )
+
+        img = Image.new("RGB", (width, height), color=(73, 109, 137))
+
+        d = ImageDraw.Draw(img)
+        d.text((10, 10), airport_details, fill=(255, 255, 0))
+        d.polygon(wind_poly, fill="white", outline="white", width=1)
+        d.polygon(runway_poly, fill=None, outline="white", width=1)
+
+        img.save(image_filename)
+
     def draw_wind(self, oled_id, airport, rway_angle, winddir, windspeed):
         """Draw Wind Arrow and Runway."""
         if oled_id > len(self.oled_list):
@@ -267,6 +293,12 @@ class UpdateOLEDs:
                 f"Updating OLED Wind: {airportcode} : rwy: {best_runway} : wind {winddir}"
             )
             self.draw_wind(oled_id, airportcode, best_runway, winddir, windspeed)
+            self.generate_image(oled_id, airportcode, best_runway, winddir, windspeed)
+        return
+
+    def update_oled_status(self, oled_id):
+        """Status Update Display"""
+
         return
 
     def update_loop(self):
@@ -280,10 +312,17 @@ class UpdateOLEDs:
             for oled_id in range(0, (self.device_count)):
                 self.oled_text(oled_id, f"run({count}): {oled_id}")
                 # TODO: This is hardcoded
-                if oled_id == 3:
+                if oled_id == 1:
                     self.update_oled_wind(oled_id, "kbfi", 140)
+                if oled_id == 2:
+                    self.update_oled_wind(oled_id, "ksea", 160)
+                if oled_id == 3:
+                    self.update_oled_wind(oled_id, "kpae", 160)
                 if oled_id == 4:
                     self.update_oled_wind(oled_id, "kpwt", 200)
                 if oled_id == 5:
                     self.update_oled_wind(oled_id, "kfhr", 340)
+                if oled_id == 6:
+                    self.update_oled_status(oled_id)
+            # time.sleep(20)
             time.sleep(180)
