@@ -15,7 +15,7 @@ class AppInfo:
     """
 
     def __init__(self):
-        self.cur_version_info = "4.4"
+        self.cur_version_info = "4.5"
         self.available_version = "3.0"
         self.refresh()
 
