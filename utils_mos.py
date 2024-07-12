@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*- #
 """
 Created on Tue Feb  7 20:25:48 2023
 
@@ -11,8 +10,14 @@ import utils
 
 import debugging
 
+
 # Moved this here from other places ..
 # This needs to be restructured before it can be used in the new code layout.
+
+# TODO:
+#  Open question on the appropriateness of using MOS data formats, or switching
+#  to the newer NBM data sets - https://vlab.noaa.gov/web/mdl/nbm
+#
 
 
 def mos_decode_routine(
@@ -67,7 +72,16 @@ def mos_decode_routine(
                 ap_flag = 1
                 # used to determine if a category is being reported in MOS or not. If not, need to inject it.
                 cat_counter = 0
-                (dat0, dat1, dat2, dat3, dat4, dat5, dat6, dat7,) = (
+                (
+                    dat0,
+                    dat1,
+                    dat2,
+                    dat3,
+                    dat4,
+                    dat5,
+                    dat6,
+                    dat7,
+                ) = (
                     [] for i in range(8)
                 )  # Clear lists
             continue

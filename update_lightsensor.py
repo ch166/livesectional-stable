@@ -3,7 +3,6 @@
 
 # Update i2c attached devices
 
-
 # RPI GPIO Pinouts reference
 ###########################
 #    3V3  (1) (2)  5V     #
@@ -31,14 +30,10 @@
 
 import time
 
-# import datetime
-
 from python_tsl2591 import tsl2591
 
+import random
 import debugging
-
-# import utils
-# import utils_i2c
 
 
 class LightSensor:
@@ -76,10 +71,10 @@ class LightSensor:
             # Look for device ID hex(29)
             # Datasheet suggests this device also occupies addr 0x28
             self.found_device = True
-            self.i2cbus.bus_lock()
-            self.tsl = tsl2591(i2c_bus=1)  # initialize
-            self.tsl.set_timing(5)
-            self.i2cbus.bus_unlock()
+            if self.i2cbus.bus_lock("enable_i2c_device"):
+                self.tsl = tsl2591(i2c_bus=1)  # initialize
+                self.tsl.set_timing(1)
+                self.i2cbus.bus_unlock()
             # FIXME: This time interval should align to the thread cycle time
             # The current default interval is 60s
         else:
@@ -89,21 +84,24 @@ class LightSensor:
         """Thread Main Loop"""
         outerloop = True  # Set to TRUE for infinite outerloop
         while outerloop:
+            current_light = None
             if self.found_device:
-                try:
-                    self.i2cbus.bus_lock()
-                    current_light = self.tsl.get_current()
+                if self.i2cbus.bus_lock("light sensor update loop"):
+                    try:
+                        current_light = self.tsl.get_current()
+                    except OSError as err:
+                        debugging.info(f"light sensor read failure: {err}")
+                        # Try to rediscover the device on the i2c bus
+                        self.i2cbus.bus_unlock()
+                        self.enable_i2c_device()
                     self.i2cbus.bus_unlock()
-                except Exception as err:
-                    self.i2cbus.bus_unlock()
-                    self.found_device = False
-                    debugging.error(err)
                 lux = current_light["lux"] * 2
                 lux = max(lux, 20)
                 lux = min(lux, 255)
                 debugging.debug(f"Setting light levels: {lux}")
                 self.led_mgmt.set_brightness(lux)
-                time.sleep(60)
+                sleep_interval = 30 + random.randint(0, 5)
+                time.sleep(sleep_interval)
             else:
                 # No device found - longer sleeping
                 debugging.info(

@@ -1,0 +1,155 @@
+Version 4.4.07.11.24
+07-11-2024
+Lots of stability improvements and performance improvements to the overall code
+Added some bugs, and found them, and them removed them.
+Updated to use latest version of python dependencies to address security issues
+Restructured processing of Metar data to associate it with the airport object
+Using black as python formatter consistently
+Improved cross thread lock handling
+Better startup handling for machines that don't have active i2c buses
+Better first boot handling - gracefully handles missing data files
+Improved documentation
+Added scripting to create/update python environments
+Added capability to use METAR from adjacent airport
+
+Version 4.4.07.16.23
+07-16-2023
+Significant restructuring of code
+Running multiple separate threads to handle the discrete functions
+Livesectional is now a single process rather than a set of disrete processes.
+Airport data / Metar data now shared across LED, OLED and Web processes- updated on a regular cadence
+New /wx/ API call to serve METAR data to javascript in web interface - fewer external dependencies
+Stable error handling of variable data in METAR datasets - allowing for months of stable operation on a Raspberry PI Pico 2W
+MOS code and Selector switch code still needs work to integrate it into the system
+Process for livemap is installed as a simple systemd managed process
+Moved most of the utility functions into utils_XXX.py files
+
+
+Version 4.4
+01-12-2021
+Forked from v4.373 - Started reorganizing code
+Moved data files to data/ directory
+Redo of configuration management - using common settings.py / config.ini update
+Moved to local copy of fontawesome 6
+Minimizing external dependencies
+Pushing through pylint to standardize code
+In app timezone handling - without needing to change the base OS timezone
+
+
+Version 4.373
+4-21-2021
+Fixed a bug that caused web interface to crash if XML airport data didn't include Lat/Lon data.
+Files updated: webapp.py, admin.py 
+
+Version 4.372
+4-5-2021
+Fixed bug that missed lowest altitude ceiling on METAR's not reporting flight categories
+Added check to Settings Editor page to be sure field isn't left blank then accidently saved. This would cause an error.
+Files updated: metar-v4.py, confedit.html, base.html, admin.py
+
+Version 4.371
+3-26-2021
+Fixed two dependencies to allow image to work on RPi 4B.
+Needed to pip3 uninstall rpi_ws281x then pip3 install rpi_ws281x
+Needed to pip3 install Adafruit_BBIO
+Files updated: index.html, admin.py
+
+Version 4.370
+3-7-2021
+Added routine to check current time against reboot time if desired and reboot in the middle of the night.
+admin.py houses 2 settings that are enabled. use_reboot will enable/disable setting and time_reboot dictates time to reboot.
+Also, autorun in config.py must be set to 'Yes' for this feature to be enabled.
+Files updated: admin.py, metar-v4.py, confedit.html.
+
+Version 4.361
+2-1-2021
+Added ability for watchdog script, check-display.py to restart either metar-v4.py (LED's) and/or metar-display-v4.py (OLED's)
+if either one encounter an error that caused an error. Many times this is caused by in interruption to wifi, or FAA data, etc.
+Files updated: check-display.py, startup.py, webapp.py.
+
+Version 4.360
+1-5-2021
+Added a Map Layout feature under Map Functions. This will show the LED routing and airports used.
+Added Flight Category Badges and Raw METAR data next to each airport in the Airport Editor.
+Fixed bug when the FAA METAR data doesn't include either the flight_category and forecast fields in the xml data.
+Files updated: metar-v4.py, style-v4.css, apedit.html, base.html, led_map.html, webapp.py
+
+Version 4.351
+12-31-2020
+Fixed bug in Web Remote app that crashed the script when 'submit/refresh' is pressed.
+Files updated: lsremote.html
+
+Version 4.350
+12-27-2020
+Added contextual menu item called 'Local Machines' that lists if multiple maps are on same local network.
+Deleted (commented out) code and variables used with ftp-v4.py. This script is now obsolete.
+***This update requires new dependencies, python-nmap and nmap.
+So a new image download is required to affect this update.
+Files updated: admin.py, base.html, webapp.py, ftp-v4.py
+
+Version 4.347
+12-3-2020
+Added menu item under Map Utilities to display console output of Scripts.
+Added menu item under Map Utilities to display the contents of the logfile.
+Files updated: webapp.py, base.html, stream_log.html, open_console.html, webapp.py, rc.local, base.html
+***This update requires a new dependency, seashells from http://seashells.io which had to be modified,
+So a new image download is required to affect this update.
+
+Version 4.346
+11-26-2020
+Added menu item under Map Utilities to manually check for an update.
+Added dedicated page with instructions on safely updating software.
+Added dynamic display of raw METAR next to airports listed in the Airport Editor.
+Added new transitional wipe - Checker Board
+Files updated: admin.py, base.html, webapp.py, apedit.html, wipes-v4.py, config.py, update_page.html, Profiles
+
+Version 4.345
+11-15-2020
+Fixed bugs in wipes-v4.py that caused the lat/lons to be calculated incorrectly.
+Removed all led off from rainbow wipe.
+Added local variable turnoffrefresh to metar-v4.py to disable the refresh after wipes when updating FAA data.
+Files updated: admin.py, webapp.py, wipes-v4.py
+
+Version 4.344
+11-5-2020
+Added Newer Image Check and message to update routine in webapp.py, base.html and index.html.
+Fixed Sleep Timer bug in metar-display-v4.py.
+Fixed Rotary Switch Settings in all Profiles.
+Updated Thank-You section of index.html.
+Files updated: metar-display-v4.py, admin.py, index.html, webapp.py, Profiles.
+
+Version 4.343
+10-16-2020
+Fixed bug in wipes-v4.py that didn't dim the LED Brightness when a light sensor is used.
+Fixed bug in metar-v4.py.
+Fixed bug in webapp.py which caused an error on the airport editor when an international airport is entered and saved.
+Added changes to https://github.com/markyharris/livesectional.
+
+Version 4.342 - Image must be downloaded for this version.
+Fixed bug in webapp.py when page is loaded directly from URL box rather than the loaded page.
+Added logging of Current RPI IP address whenever FAA weather update is retrieved in metar-v4.py.
+Fixed bug where TAF XML reports OVC without a cloud level agl. It uses vert_vis_ft as a backup in metar-v4.py.
+Fixed bug when debug mode is changed to 'Debug' in metar-v4.py. 
+***Added a few dependencies to accommodate future features.
+Files updated: admin.py, metar-v4.py, webapp.py.
+
+Version 4.331
+7-24-2020
+Added menu item to Expand File System.
+Created routine to Expand File System.
+Added WiFi, Memory and CPU information to System Information page.
+Fixed bug where previous version was not properly backed up.
+Files updated: admin.py, update_info.txt, webapp.py, expandfs.html, base.html, index.html, info-v4.py.
+
+Version 4.330
+7-23-2020
+Added a Update History Page to provide this information.
+Updated Utilities Menu to include Update History.
+Added formatting to the Time Zone Set page.
+Files updated: admin.py, update_info.txt, webapp.py, update_info.html, base.html, index.html.
+
+Version 4.321
+7-22-2020
+Added Heat Map Data Import for easier upgrading.
+Various small bug fixes.
+Files updated: admin.py, update_info.txt, webapp.py, hmedit.html, base.html, index.html.

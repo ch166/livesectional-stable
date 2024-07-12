@@ -2,6 +2,7 @@
 """ Collection of shared utility functions for all of the modules ."""
 
 import os
+import os.path
 import time
 import shutil
 import socket
@@ -21,7 +22,11 @@ import pytz
 
 import debugging
 
-# import conf
+def file_exists(filename):
+    """Check if a file exists."""
+    if os.path.isfile(filename):
+        return True
+    return False
 
 
 def is_connected():
@@ -87,7 +92,7 @@ def get_loc():
     loc = {}
 
     url_loc = "https://extreme-ip-lookup.com/json/"
-    geo_json_data = requests.get(url_loc)
+    geo_json_data = requests.get(url_loc, timeout=10)
     data = json.loads(geo_json_data.content.decode())
 
     ip_data = data["query"]
@@ -186,7 +191,10 @@ def download_newer_file(session, url, filename, decompress=False, etag=None):
                 download = True
             else:
                 # Server side file is same or older, our file is up to date
-                msg = f"Timestamp check - Server side: {datetime.fromtimestamp(url_date.timestamp())} Local : {datetime.fromtimestamp(file_time.timestamp())}"
+                msg = (
+                    f"Timestamp check - Server side: {datetime.fromtimestamp(url_date.timestamp())}"
+                    f"Local : {datetime.fromtimestamp(file_time.timestamp())}"
+                )
                 debugging.debug(msg)
         if (url_etag is not None) and (etag != url_etag):
             # Check to see if downloaded etag and value passed in are the same. If not - download is true
@@ -256,7 +264,7 @@ def decompress_file_gz(srcfile, dstfile):
 def time_in_range(start_time, end_time, check_time):
     """See if a time falls within range."""
     if start_time < end_time:
-        return check_time >= start_time and check_time <= end_time
+        return check_time >= start_time <= end_time
     else:  # overnight
         return check_time >= start_time or check_time <= end_time
 
@@ -312,6 +320,13 @@ def time_format_taf(raw_time):
     return raw_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def time_format_hms(raw_time):
+    """Convert raw time into standardized printable string."""
+    if raw_time is None:
+        raw_time = datetime(1970, 1, 1)
+    return raw_time.strftime("%H:%M:%S")
+
+
 def time_format(raw_time):
     """Convert raw time into standardized printable string."""
     if raw_time is None:
@@ -337,9 +352,8 @@ def current_time(conf):
 
 def current_time_taf_offset(conf):
     """Get time for TAF period selected (UTC)."""
-    UTC = pytz.utc
     offset = conf.get_int("rotaryswitch", "hour_to_display")
-    curr_time = datetime.now(UTC) + timedelta(hours=offset)
+    curr_time = datetime.now(pytz.utc) + timedelta(hours=offset)
     return curr_time
 
 

@@ -19,15 +19,16 @@ logger = None
 
 
 def loginit():
-    """Init logging data"""
-
+    """Init logging data."""
     global logger
     # FIXME: Move filename to config
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
     # logging.basicConfig(filename="logs/debugging.log", level=logging.DEBUG)
-    logfilehandler = logging.handlers.WatchedFileHandler("logs/debugging.log")
+    logfilehandler = logging.handlers.TimedRotatingFileHandler(
+        "logs/debugging.log", when="midnight", interval=1, backupCount=5, utc=True
+    )
     logfilehandler.setLevel(logging.DEBUG)
     logger.addHandler(logfilehandler)
 
@@ -41,10 +42,13 @@ def loginit():
     logfilehandler.setFormatter(formatter)
     logconsolehandler.setFormatter(formatter)
 
+    # Disable PIL debug logs by default
+    # Should eliminate STREAM b'IHDR' and STREAM b'IDAT' unnecessary logs
+    logging.getLogger("PIL").setLevel(logging.WARNING)
+
 
 def crash(args):
-    """Handle Crash Data - Append to crash.log"""
-
+    """Handle Crash Data - Append to crash.log."""
     global logger
     # FIXME: Move filename to config
     appname = "LIVEMAP:"
@@ -61,61 +65,56 @@ def crash(args):
 
 
 def dprint(args):
-    """Passthrough call to print() if DEBUG_MSGS is enabled"""
-
+    """Passthrough call to print() if DEBUG_MSGS is enabled."""
     global logger
     if PRINT_MSGS:
         logger.info(args)
         appname = "LIVEMAP:"
         logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        # print(logtime, appname, "PRINT:", args, flush=True)
+        print(logtime, appname, "PRINT:", args, flush=True)
     else:
         return
 
 
 def info(args):
-    """Passthrough call to print() if DEBUG_MSGS is enabled"""
-
+    """Passthrough call to print() if DEBUG_MSGS is enabled."""
     global logger
     if INFO_MSGS:
         logger.info(args)
-        appname = "LIVEMAP:"
-        logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # appname = "LIVEMAP:"
+        # logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         # print(logtime, appname, "INFO:", args, flush=True)
     else:
         return
 
 
 def warn(args):
-    """Passthrough call to print() if WARN_MSGS is enabled"""
-
+    """Passthrough call to print() if WARN_MSGS is enabled."""
     global logger
     if WARN_MSGS:
         logger.warning(args)
-        appname = "LIVEMAP:"
-        logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # appname = "LIVEMAP:"
+        # logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         # print(logtime, appname, "WARN:", args, flush=True)
     else:
         return
 
 
 def error(args):
-    """Passthrough call to print() if ERR_MSGS is enabled"""
-
+    """Passthrough call to print() if ERR_MSGS is enabled."""
     global logger
     if ERR_MSGS:
         logger.error(args)
-        appname = "LIVEMAP:"
-        logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        logging.error(args)
+        # appname = "LIVEMAP:"
+        # logtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # logging.error(args)
         # print(logtime, appname, "ERROR:", args, flush=True)
     else:
         return
 
 
 def debug(args):
-    """Passthrough call to print() if ERR_MSGS is enabled"""
-
+    """Passthrough call to print() if ERR_MSGS is enabled."""
     global logger
     if DEBUG_MSGS:
         logger.debug(args)
